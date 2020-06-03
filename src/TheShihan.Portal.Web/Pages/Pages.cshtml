@@ -1,0 +1,23 @@
+﻿@page "/pages/{alias}"
+
+@inject OrchardCore.IOrchardHelper Orchard
+
+@{
+    var thepage = await Orchard.GetContentItemByAliasAsync("alias:" + alias);
+    ViewData["Title"] = thepage.DisplayText;
+}
+
+
+
+
+
+@await Orchard.MarkdownToHtmlAsync((string) thepage.Content.MarkdownBodyPart.Markdown)
+
+@functions
+{
+    [FromRoute]
+    public string alias { get; set; }
+}
+
+
+

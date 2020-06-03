@@ -1,0 +1,264 @@
+{
+    "name": "DefaultTenant",
+    "displayName": "Default Tenant",
+    "description": "Default tenant recipe",
+    "author": "TheShihan",
+    "website": "https://qoo.li",
+    "version": "1.0",
+    "issetuprecipe": true,
+    "categories": [ "default" ],
+    "tags": [ "Init", "DEV" ],
+    "steps": [
+        {
+          "name": "feature",
+          "disable": [],
+          "enable": [
+            "OrchardCore.Admin",
+            "OrchardCore.Features",
+            "OrchardCore.Navigation",
+            "OrchardCore.Recipes",
+            "OrchardCore.Roles",
+            "OrchardCore.Settings",
+            "OrchardCore.Themes",
+            "OrchardCore.Users",
+            "OrchardCore.Users.Registration",
+            "OrchardCore.Microsoft.Authentication.AzureAD",
+            "TheAdmin",
+            "OrchardCore.Alias",
+            "OrchardCore.Autoroute",
+            "OrchardCore.ContentFields",
+            "OrchardCore.ContentPreview",
+            "OrchardCore.Contents",
+            "OrchardCore.ContentTypes",
+            "OrchardCore.Indexing",
+            "OrchardCore.Lucene",
+            "OrchardCore.Markdown",
+            "OrchardCore.Title"
+          ]
+        },
+        {
+          "name": "themes",
+          "admin": "TheAdmin",
+          "site": "" 
+        },
+        {
+          "name": "settings",
+          "RegistrationSettings": {
+            "UsersCanRegister": false
+          },
+          "LuceneSettings": {
+            "SearchIndex": "Search",
+            "DefaultSearchFields": [
+              "Content.ContentItem.FullText"
+            ]
+          }
+        },
+        {
+          "name": "ContentDefinition",
+          "ContentTypes": [
+            {
+              "Name": "Project",
+              "DisplayName": "Project",
+              "Hidden": false,
+              "Settings": {
+                "ContentTypeSettings": {
+                  "Creatable": true,
+                  "Draftable": false,
+                  "Versionable": false,
+                  "Listable": false,
+                  "Securable": true
+                }
+              },
+              "ContentTypePartDefinitionRecords": [
+                {
+                  "PartName": "TitlePart",
+                  "Name": "TitlePart",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "0"
+                    }
+                  }
+                },
+                {
+                  "PartName": "AutoroutePart",
+                  "Name": "AutoroutePart",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "1"
+                    },
+                    "ContentIndexSettings": {
+                      "Included": false,
+                      "Stored": false,
+                      "Analyzed": false,
+                      "Sanitized": false,
+                      "Tokenized": false,
+                      "Template": null
+                    },
+                    "AutoroutePartSettings": {
+                      "AllowCustomPath": true,
+                      "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                      "ShowHomepageOption": false
+                    }
+                  }
+                },
+                {
+                  "PartName": "Project",
+                  "Name": "Project",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "2"
+                    }
+                  }
+                },
+                {
+                  "PartName": "MarkdownBodyPart",
+                  "Name": "MarkdownBodyPart",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Editor": "Wysiwyg",
+                      "Position": "3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "ImportRun",
+              "DisplayName": "Import Run",
+              "Hidden": false,
+              "Settings": {
+                "ContentTypeSettings": {
+                  "Creatable": true,
+                  "Draftable": false,
+                  "Versionable": false,
+                  "Listable": false,
+                  "Securable": true
+                }
+              },
+              "ContentTypePartDefinitionRecords": [
+                {
+                  "PartName": "TitlePart",
+                  "Name": "TitlePart",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "0"
+                    }
+                  }
+                },
+                {
+                  "PartName": "AutoroutePart",
+                  "Name": "AutoroutePart",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "1"
+                    },
+                    "ContentIndexSettings": {
+                      "Included": false,
+                      "Stored": false,
+                      "Analyzed": false,
+                      "Sanitized": false,
+                      "Tokenized": false,
+                      "Template": null
+                    },
+                    "AutoroutePartSettings": {
+                      "AllowCustomPath": true,
+                      "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                      "ShowHomepageOption": false
+                    }
+                  }
+                },
+                {
+                  "PartName": "ImportRun",
+                  "Name": "ImportRun",
+                  "Settings": {
+                    "ContentTypePartSettings": {
+                      "Position": "2"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "ContentParts": [
+            {
+              "Name": "Project",
+              "Settings": {},
+              "ContentPartFieldDefinitionRecords": [
+                {
+                  "FieldName": "TextField",
+                  "Name": "ProjectNumber",
+                  "Settings": {
+                    "ContentPartFieldSettings": {
+                      "DisplayName": "Project Number",
+                      "Position": "0"
+                    },
+                    "ContentIndexSettings": {}
+                  }
+                }             
+              ]
+            },
+            {
+              "Name": "ImportRun",
+              "Settings": {},
+              "ContentPartFieldDefinitionRecords": [
+                {
+                  "FieldName": "DateTimeField",
+                  "Name": "ImportStartTime",
+                  "Settings": {
+                    "ContentPartFieldSettings": {
+                      "DisplayName": "Import Start Time",
+                      "Position": "0"
+                    },
+                    "ContentIndexSettings": {}
+                  }
+                },
+                {
+                  "FieldName": "DateTimeField",
+                  "Name": "ImportEndTime",
+                  "Settings": {
+                    "ContentPartFieldSettings": {
+                      "DisplayName": "Import End Time",
+                      "Position": "1"
+                    },
+                    "ContentIndexSettings": {}
+                  }
+                },
+                {
+                  "FieldName": "TextField",
+                  "Name": "ImportLog",
+                  "Settings": {
+                    "ContentPartFieldSettings": {
+                      "DisplayName": "Import Log",
+                      "Position": "2"
+                    },
+                    "ContentIndexSettings": {}
+                  }
+                },
+                {
+                  "FieldName": "TextField",
+                  "Name": "Status",
+                  "Settings": {
+                    "ContentPartFieldSettings": {
+                      "DisplayName": "Status",
+                      "Position": "3"
+                    },
+                    "ContentIndexSettings": {}
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Roles",
+          "Roles": [
+            {
+              "Name": "Visitor",
+              "Description": "Visitor Role",
+              "Permissions": [
+              ]
+            }
+          ]
+        }
+    ]
+  }
