@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrchardCore.BackgroundTasks;
 using TheShihan.Portal.Web.Synchronization;
 
 namespace TheShihan.Portal.Web
@@ -20,7 +21,7 @@ namespace TheShihan.Portal.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOrchardCms(builder => builder.ConfigureServices(svc => svc.AddRazorPages().AddRazorPagesOptions(options => {
+            services.AddOrchardCms(builder => builder.ConfigureServices(svc => svc.AddSingleton<IBackgroundTask, ProjectImportBackgroundTask>().AddRazorPages().AddRazorPagesOptions(options => {
                 options.Conventions.AuthorizeFolder("/", "ReadAccess");
                 options.Conventions.AllowAnonymousToFolder("/login");
                 options.Conventions.AllowAnonymousToFolder("/Error");
@@ -32,8 +33,6 @@ namespace TheShihan.Portal.Web
             });
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/login");
-
-            services.AddSingleton<IHostedService, ScheduledProjectsImport>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
